@@ -19,15 +19,23 @@ The example is a simple simulation of a video notification system. When a video 
 
 ### Example
 ```php
-$videoData = new VideoData(); // Init the subject
-$phoneNotifier = new PhoneNotifier($videoData); // Init the notifier (observer)
-new EmailNotifier($videoData); // Can be added more notifiers (observers) | Discarded in this example
+// Init the subject
+$videoData = new VideoData();
 
-$videoData->setTitle('Observer pattern'); // When the subject is changed, the observers are notified
+// Init the notifier (observer)
+$phoneNotifier = new PhoneNotifier($videoData);
 
-$videoData->detachObserver($phoneNotifier); // Detach a specific observer
+// Can be added more notifiers (observers)
+new EmailNotifier($videoData); // Discarded in this example
 
-$videoData->setDescription('New video description'); // When the subject is changed, the observers are notified
+// When the subject is changed, the observers are notified
+$videoData->setTitle('Observer pattern');
+
+// Detach a specific observer
+$videoData->detachObserver($phoneNotifier);
+
+// When the subject is changed, the observers are notified
+$videoData->setDescription('New video description');
 ```
 
 ### Output
