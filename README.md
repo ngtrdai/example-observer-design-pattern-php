@@ -5,8 +5,46 @@ This is a simple example of the observer pattern in PHP.
 The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
 
 ## UML diagram
-```
-comming soon...
+```mermaid
+classDiagram
+    VideoData --|> Subject : +extends
+    Subject -- Observer : +observers
+    VideoData -- EmailNotifier : +subject
+    VideoData -- PhoneNotifier : +subject
+    EmailNotifier ..|> Observer
+    PhoneNotifier ..|> Observer
+    VideoData : -String title
+    VideoData : -String description
+    VideoData : -String fileName
+    VideoData : +setTitle(String title)
+    VideoData : +getTitle() string
+    VideoData : +setDescription(String description)
+    VideoData : +getDescription() string
+    VideoData : +setFileName(String fileName)
+    VideoData : +getFileName() string
+    VideoData : +videoDataChanged() void
+
+    class Subject {
+        -List~Observer~ Observer
+        +attachObserver()
+        +detachObserver()
+        +notifiObserver()
+    }
+
+    class Observer {
+        #Subject subject
+        +notify(Subject subject, object object)
+    }
+
+    class EmailNotifier {
+        -Subject subject
+        +notify(Subject subject, Object object)
+    }
+
+    class PhoneNotifier {
+        -Subject subject
+        +notify(Subject subject, Object object)
+    }
 ```
 
 ## Installation and running
